@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Greetings App 🎉</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    button { margin: 5px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    #result { margin-top: 20px; font-size: 18px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Greetings App 🎉</h1>
+  <p>Click a number to get a greeting:</p>
+
+  <div id="buttons"></div>
+  <p id="result"></p>
+
+  <script>
+    const apiUrl = "/greet"; // relative URL since API is same server
+    const buttonsDiv = document.getElementById("buttons");
+    const result = document.getElementById("result");
+
+    for (let i = 1; i <= 10; i++) {
+      const btn = document.createElement("button");
+      btn.innerText = i;
+      btn.onclick = async () => {
+        const res = await fetch(`${apiUrl}/${i}`);
+        const data = await res.json();
+        result.innerText = data.greeting;
+      };
+      buttonsDiv.appendChild(btn);
+    }
+  </script>
+</body>
+</html>
